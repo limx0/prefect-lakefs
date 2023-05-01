@@ -1,52 +1,29 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
     hooks:
-      - id: forbid-new-submodules
-      - id: fix-encoding-pragma
-        args: [--remove]
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
-      - id: debug-statements
-      - id: detect-private-key
-      - id: check-builtin-literals
-      - id: check-case-conflict
-      - id: check-executables-have-shebangs
-      - id: check-json
-      - id: check-merge-conflict
-      - id: check-symlinks
-      - id: check-toml
-      - id: check-xml
-      - id: check-yaml
-
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.4
-    hooks:
-      - id: codespell
-        description: Checks for common misspellings.
-        args: ["-L", "ot,zar,warmup"]
-
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.254
-    hooks:
-      - id: ruff
-        args: [ "--line-length", "120" ]
-
-
+      - id: isort
+        language_version: python3
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 22.3.0
     hooks:
       - id: black
-        entry: "black"
-        args: [ "--line-length", "120"]
-
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.1.1
+        language_version: python3
+  - repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
     hooks:
-      - id: mypy
+      - id: flake8
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.5.0
+    hooks:
+      - id: interrogate
+        args: [-vv]
+        pass_filenames: false
+  - repo: https://github.com/fsouza/autoflake8
+    rev: v0.3.2
+    hooks:
+      - id: autoflake8
+        language_version: python3
         args: [
-          --no-strict-optional,
-          --ignore-missing-imports,
-          --warn-no-return,
+          '--in-place',
         ]
-        additional_dependencies: []

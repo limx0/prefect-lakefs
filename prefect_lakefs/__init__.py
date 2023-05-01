@@ -1,5 +1,4 @@
-from prefect_lakefs.credentials import LakeFsCredentials
-from prefect_lakefs.storage import LakeFS
+from . import _version
+from .blocks import LakefsBlock  # noqa
 
-
-__all__ = ["LakeFsCredentials", "LakeFS"]
+__version__ = _version.get_versions()["version"]
