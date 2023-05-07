@@ -364,7 +364,7 @@ async def revert_branch(
         branch: name of the branch to apply revert.
         revert_ref: string value of a ref to revert.
         parent_number: number representing parent index(based 1) to pick
-            incase of reverting merge commits. Defaults to 1.
+            in case of reverting merge commits. Defaults to 1.
         **lakefs_kwargs: Optional extra keyword arguments to pass to the LakeFS API.
 
     Returns:
