@@ -13,12 +13,12 @@ with open("README.md") as readme_file:
 
 setup(
     name="prefect-lakefs",
-    description="Prefect Collection Template contains all the boilerplate that you need to create a Prefect collection.",
+    description="Prefect integrations for interacting with LakeFS services.",
     license="Apache License 2.0",
-    author="Arthur Dent",
-    author_email="arthur.dent@example.com",
+    author="limx0",
+    author_email="limx0@example.com",
     keywords="prefect",
-    url="https://github.com/arthur_dent/prefect-lakefs",
+    url="https://github.com/limx0/prefect-lakefs",
     long_description=readme,
     long_description_content_type="text/markdown",
     version=versioneer.get_version(),

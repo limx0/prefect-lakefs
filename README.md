@@ -5,12 +5,12 @@
     <!--- <br> -->
     <a href="https://pypi.python.org/pypi/prefect-lakefs/" alt="PyPI version">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-lakefs?color=0052FF&labelColor=090422"></a>
-    <a href="https://github.com/arthur_dent/prefect-lakefs/" alt="Stars">
-        <img src="https://img.shields.io/github/stars/arthur_dent/prefect-lakefs?color=0052FF&labelColor=090422" /></a>
+    <a href="https://github.com/limx0/prefect-lakefs/" alt="Stars">
+        <img src="https://img.shields.io/github/stars/limx0/prefect-lakefs?color=0052FF&labelColor=090422" /></a>
     <a href="https://pypistats.org/packages/prefect-lakefs/" alt="Downloads">
         <img src="https://img.shields.io/pypi/dm/prefect-lakefs?color=0052FF&labelColor=090422" /></a>
-    <a href="https://github.com/arthur_dent/prefect-lakefs/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/arthur_dent/prefect-lakefs?color=0052FF&labelColor=090422" /></a>
+    <a href="https://github.com/limx0/prefect-lakefs/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/limx0/prefect-lakefs?color=0052FF&labelColor=090422" /></a>
     <br>
     <a href="https://prefect-community.slack.com" alt="Slack">
         <img src="https://img.shields.io/badge/slack-join_community-red.svg?color=0052FF&labelColor=090422&logo=slack" /></a>
@@ -18,7 +18,7 @@
         <img src="https://img.shields.io/badge/discourse-browse_forum-red.svg?color=0052FF&labelColor=090422&logo=discourse" /></a>
 </p>
 
-Visit the full docs [here](https://arthur_dent.github.io/prefect-lakefs) to see additional examples and the API reference.
+Visit the full docs [here](https://limx0.github.io/prefect-lakefs) to see additional examples and the API reference.
 
 Prefect Collection Template contains all the boilerplate that you need to create a Prefect collection.
 
@@ -87,17 +87,17 @@ Block.load("BLOCK_NAME_PLACEHOLDER")
     prefect block register -m prefect_lakefs
     ```
 
-A list of available blocks in `prefect-lakefs` and their setup instructions can be found [here](https://arthur_dent.github.io/prefect-lakefs/blocks_catalog).
+A list of available blocks in `prefect-lakefs` and their setup instructions can be found [here](https://limx0.github.io/prefect-lakefs/blocks_catalog).
 
 --->
 
 ### Feedback
 
-If you encounter any bugs while using `prefect-lakefs`, feel free to open an issue in the [prefect-lakefs](https://github.com/arthur_dent/prefect-lakefs) repository.
+If you encounter any bugs while using `prefect-lakefs`, feel free to open an issue in the [prefect-lakefs](https://github.com/limx0/prefect-lakefs) repository.
 
 If you have any questions or issues while using `prefect-lakefs`, you can find help in either the [Prefect Discourse forum](https://discourse.prefect.io/) or the [Prefect Slack community](https://prefect.io/slack).
 
-Feel free to star or watch [`prefect-lakefs`](https://github.com/arthur_dent/prefect-lakefs) for updates too!
+Feel free to star or watch [`prefect-lakefs`](https://github.com/limx0/prefect-lakefs) for updates too!
 
 ### Contributing
 
@@ -113,7 +113,7 @@ pip install -e ".[dev]"
 ```
 4. Make desired changes
 5. Add tests
-6. Insert an entry to [CHANGELOG.md](https://github.com/arthur_dent/prefect-lakefs/blob/main/CHANGELOG.md)
+6. Insert an entry to [CHANGELOG.md](https://github.com/limx0/prefect-lakefs/blob/main/CHANGELOG.md)
 7. Install `pre-commit` to perform quality checks prior to commit:
 ```
 pre-commit install

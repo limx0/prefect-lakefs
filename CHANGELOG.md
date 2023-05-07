@@ -30,4 +30,4 @@ Released on ????? ?th, 20??.
 
 ### Added
 
-- `task_name` task - [#1](https://github.com/arthur_dent/prefect-lakefs/pull/1)
+- `task_name` task - [#1](https://github.com/limx0/prefect-lakefs/pull/1)
