@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- bootstrap code from the prefect collection template.
+- prefect tasks for lakefs branches.
+
 ### Changed
+
+- LakeFSCredentials Block.
 
 ### Deprecated
 

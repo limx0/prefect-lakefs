@@ -1,6 +1,6 @@
 site_name: prefect-lakefs
 site_url: https://arthur_dent.github.io/prefect-lakefs
-repo_url: https://github.com/arthur_dent/prefect-lakefs
+repo_url: https://github.com/limx0/prefect-lakefs
 edit_uri: edit/main/docs/
 theme:
   name: material
@@ -55,8 +55,6 @@ plugins:
   - gen-files:
       scripts:
         - docs/gen_home_page.py
-        - docs/gen_examples_catalog.py
-        - docs/gen_blocks_catalog.py
   - mkdocstrings:
       handlers:
         python:
@@ -73,10 +71,5 @@ watch:
 
 nav:
     - Home: index.md
-    - Blocks Catalog: blocks_catalog.md
-    - Examples Catalog: examples_catalog.md
-    - API Reference:
-        - Tasks: tasks.md
-        - Flows: flows.md
-
-
+    - Credentials: credentials.md
+    - Branches: branches.md
