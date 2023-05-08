@@ -52,10 +52,12 @@ class LakeFSCredentials(Block):
     )
 
     _block_type_name = "LakeFS Credentials"
+    _block_type_slug = "lakefs-credentials"
     # TODO: add lakefs logo_url
-    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/08yCE6xpJMX9Kjl5VArDS/c2ede674c20f90b9b6edeab71feffac9/prefect-200x200.png?h=250"  # noqa
+    _logo_url = "https://styles.redditmedia.com/t5_57y5vj/styles/communityIcon_oapa1t4myyu71.png?width=256&v=enabled&s=d3319b91ef0a5eea78e46242e07f2034834f31f7"  # noqa
     # TODO: add LakeFSCredentials doc slug
     _documentation_url = "https://prefecthq.github.io"  # noqa
+    _documentation_url = "https://limx0.github.io/prefect-lakefs/credentials/#prefect_lakefs.credentials.LakeFSCredentials"  # noqa
 
     @contextmanager
     def get_client(
