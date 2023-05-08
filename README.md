@@ -20,20 +20,15 @@
 
 Visit the full docs [here](https://limx0.github.io/prefect-lakefs) to see additional examples and the API reference.
 
-Prefect Collection Template contains all the boilerplate that you need to create a Prefect collection.
+Prefect integrations for interacting with LakeFS services.
 
 
-<!--- ### Add a real-world example of how to use this Collection here
+## Welcome!
 
-Offer some motivation on why this helps.
+`prefect-lakefs` is a collection of Prefect tasks and flows which can be used to interact with lakeFS managed datalakes.
 
-After installing `prefect-lakefs` and [saving the credentials](#saving-credentials-to-block), you can easily use it within your flows to help you achieve the aforementioned benefits!
+Jump to [examples](#example-usage).
 
-```python
-from prefect import flow, get_run_logger
-```
-
---->
 
 ## Resources
 
@@ -53,49 +48,46 @@ We recommend using a Python virtual environment manager such as pipenv, conda or
 
 These tasks are designed to work with Prefect 2.0. For more information about how to use Prefect, please refer to the [Prefect documentation](https://docs.prefect.io/).
 
-<!--- ### Saving credentials to block
+### Example Usage
 
-Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://docs.prefect.io/ui/blocks/).
-
-Below is a walkthrough on saving block documents through code.
-
-1. Head over to <SERVICE_URL>.
-2. Login to your <SERVICE> account.
-3. Click "+ Create new secret key".
-4. Copy the generated API key.
-5. Create a short script, replacing the placeholders (or do so in the UI).
+#### Configure LakeFS Credentials and dive in.
 
 ```python
-from prefect_lakefs import Block
-Block(api_key="API_KEY_PLACEHOLDER").save("BLOCK_NAME_PLACEHOLDER")
+import asyncio
+
+from prefect_lakefs.credentials import LakeFSCredentials
+from prefect_lakefs.tasks import list_branches
+
+# You can configure this while adding a block in the prefect-ui or 
+#   you can save the block using .save() utility method provided by the block.
+lakefs_creds = LakeFSCredentials(
+        endpoint_url="http://localhost:8000/api/v1",
+        access_key_id="AKIAIOSFODNN7EXAMPLE",
+        secret_access_key="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    ).save("lakefs-creds")
+
+
+@flow
+def list_branches_for_example_repo():
+    branches = list_branches(
+        lakefs_credentials=LakeFSCredentials.load("lakefs-creds"),
+        repository="example",
+    )
+    print(branches)
+ 
+
+
+if __name__ == "__main__":
+    # run the flow
+    asyncio.run(list_branches())
 ```
 
-Congrats! You can now easily load the saved block, which holds your credentials:
-
-```python
-from prefect_lakefs import Block
-Block.load("BLOCK_NAME_PLACEHOLDER")
-```
-
-!!! info "Registering blocks"
-
-    Register blocks in this module to
-    [view and edit them](https://docs.prefect.io/ui/blocks/)
-    on Prefect Cloud:
-
-    ```bash
-    prefect block register -m prefect_lakefs
-    ```
-
-A list of available blocks in `prefect-lakefs` and their setup instructions can be found [here](https://limx0.github.io/prefect-lakefs/blocks_catalog).
-
---->
 
 ### Feedback
 
 If you encounter any bugs while using `prefect-lakefs`, feel free to open an issue in the [prefect-lakefs](https://github.com/limx0/prefect-lakefs) repository.
 
-If you have any questions or issues while using `prefect-lakefs`, you can find help in either the [Prefect Discourse forum](https://discourse.prefect.io/) or the [Prefect Slack community](https://prefect.io/slack).
+If you have any questions or issues while using `prefect-lakefs`, you can find help in either the [Prefect Discourse forum](https://discourse.prefect.io/) or the [Prefect Slack community](https://prefect.io/slack) or the [LakeFS Slack Community](https://go.lakefs.io/JoinSlack).
 
 Feel free to star or watch [`prefect-lakefs`](https://github.com/limx0/prefect-lakefs) for updates too!
 

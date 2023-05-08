@@ -9,12 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- bootstrap code from the prefect collection template.
-- prefect tasks for lakefs branches.
-
 ### Changed
-
-- LakeFSCredentials Block.
 
 ### Deprecated
 
@@ -26,8 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.1.0
 
-Released on ????? ?th, 20??.
+Released on May 8th, 2023.
 
 ### Added
 
-- `task_name` task - [#1](https://github.com/limx0/prefect-lakefs/pull/1)
+- bootstrap code from the prefect collection template. - [#1](https://github.com/limx0/prefect-lakefs/pull/1)
+- prefect tasks for lakefs branches. - [#1](https://github.com/limx0/prefect-lakefs/pull/1)
+
+### Changed
+
+- LakeFSCredentials Block. - [#1](https://github.com/limx0/prefect-lakefs/pull/1)
