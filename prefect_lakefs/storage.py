@@ -5,21 +5,22 @@ from prefect.context import FlowRunContext
 from prefect_aws import S3Bucket
 from pydantic import Field
 
-from prefect_lakefs.credentials import LakeFsCredentials
-from prefect_lakefs.git import commit_sha
-from prefect_lakefs.git import get_git_repo
+from prefect_lakefs.credentials import LakeFSCredentials
+from prefect_lakefs.git import commit_sha, get_git_repo
 
 
 class LakeFS(S3Bucket):
     _block_type_name = "LakeFS"
 
-    credentials: LakeFsCredentials = Field(
+    credentials: LakeFSCredentials = Field(
         description="A block containing your credentials to AWS or MinIO.",
     )
 
     def _get_s3_client(self):
         # return self.credentials.get_client()
-        raise NotImplementedError("Should be using LakeFS client via `self.credentials.get_client()`")
+        raise NotImplementedError(
+            "Should be using LakeFS client via `self.credentials.get_client()`"
+        )
 
     def _write_sync(self, key: str, data: bytes) -> None:
         client = self.credentials.objects_api
@@ -48,7 +49,9 @@ class LakeFS(S3Bucket):
     def commit_changes(self):
         if self.credentials.strict_no_dirty:
             git_repo = get_git_repo()
-            assert not git_repo.is_dirty(), "Repo has uncommitted changes, cannot commit data."
+            assert (
+                not git_repo.is_dirty()
+            ), "Repo has uncommitted changes, cannot commit data."
 
         repository = self.credentials.repository
         branch: str = self.credentials.branch

@@ -1,0 +1,4 @@
+prefect>=2.0.0
+prefect-aws>=0.2.4
+lakefs-client>=0.96
+gitpython>=3.1.31

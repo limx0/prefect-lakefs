@@ -1,5 +1,4 @@
-from prefect_lakefs.credentials import LakeFsCredentials
-from prefect_lakefs.storage import LakeFS
+from . import _version
+from prefect_lakefs.credentials import LakeFSCredentials  # noqa F401
 
-
-__all__ = ["LakeFsCredentials", "LakeFS"]
+__version__ = _version.get_versions()["version"]
