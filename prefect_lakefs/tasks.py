@@ -9,6 +9,7 @@ from prefect_lakefs.branches import (
     reset_branch,
     revert_branch,
 )
+from prefect_lakefs.commits import commit, get_commit, log_branch_commits
 
 __all__ = [
     "cherry_pick",
@@ -19,4 +20,7 @@ __all__ = [
     "list_branches",
     "reset_branch",
     "revert_branch",
+    "commit",
+    "get_commit",
+    "log_branch_commits",
 ]

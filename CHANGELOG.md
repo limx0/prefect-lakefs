@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- support for lakefs commits api. - [#4](https://github.com/limx0/prefect-lakefs/pull/4)
+
 ### Changed
 
 ### Deprecated

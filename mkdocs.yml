@@ -73,3 +73,4 @@ nav:
     - Home: index.md
     - Credentials: credentials.md
     - Branches: branches.md
+    - Commits: commits.md
