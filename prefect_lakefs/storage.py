@@ -6,7 +6,6 @@ from prefect_aws import S3Bucket
 from pydantic import Field
 
 from prefect_lakefs.credentials import LakeFSCredentials
-from prefect_lakefs.git import commit_sha, get_git_repo
 
 
 class LakeFS(S3Bucket):
@@ -23,19 +22,17 @@ class LakeFS(S3Bucket):
         )
 
     def _write_sync(self, key: str, data: bytes) -> None:
-        client = self.credentials.objects_api
-        branch = self.credentials.ref or commit_sha()
-
-        with io.BytesIO(data) as stream:
-            client.upload_object(
-                repository=self.credentials.repository,
-                branch=branch,
-                path=key,
-                content=stream,
-                metadata={""},
-            )
-        if self.credentials.commit_on_task:
-            self.commit_changes()
+        with self.credentials.get_client("objects") as client:
+            with io.BytesIO(data) as stream:
+                stream.name = key
+                client.upload_object(
+                    repository=self.credentials.repository,
+                    branch=self.credentials.branch,
+                    path=key,
+                    content=stream,
+                )
+        # if self.credentials.commit_on_task:
+        #     self.commit_changes()
 
     def _read_sync(self, key: str) -> None:
         client = self.credentials.objects_api
@@ -47,12 +44,6 @@ class LakeFS(S3Bucket):
         return data
 
     def commit_changes(self):
-        if self.credentials.strict_no_dirty:
-            git_repo = get_git_repo()
-            assert (
-                not git_repo.is_dirty()
-            ), "Repo has uncommitted changes, cannot commit data."
-
         repository = self.credentials.repository
         branch: str = self.credentials.branch
         assert branch, "If committing, `branch` must be set in `LakeFsCredentials`"
@@ -61,10 +52,5 @@ class LakeFS(S3Bucket):
         metadata = {
             "flow_run_id": run_context.flow.id,
         }
-        if self.credentials.mirror_git_repo:
-            git_repo = get_git_repo()
-            sha = commit_sha(git_repo)
-            metadata = {"git_sha": sha}
-
         commit = CommitCreation("prefect-lakefs commit", metadata=metadata)
         commits_api.commit(repository=repository, branch=branch, commit_creation=commit)

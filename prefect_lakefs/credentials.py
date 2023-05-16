@@ -50,7 +50,14 @@ class LakeFSCredentials(Block):
         description="A LakeFS URL.",
         title="LakeFS URL",
     )
-
+    repository: Optional[str] = Field(
+        description="Default LakeFS repository to use.",
+        title="Default LakeFS repository",
+    )
+    branch: Optional[str] = Field(
+        description="Default LakeFS branch to use.",
+        title="Default LakeFS branch",
+    )
     _block_type_name = "LakeFS Credentials"
     _block_type_slug = "lakefs-credentials"
     # TODO: add lakefs logo_url
@@ -62,7 +69,7 @@ class LakeFSCredentials(Block):
     @contextmanager
     def get_client(
         self,
-        client_type: Literal["branches", "commits", "objects"],
+        client_type: Literal["branches", "commits", "objects", "repository"],
     ) -> Generator[LakeFSClient, None, None]:
         """Convenience method for retrieving a LakeFS API client for deployment resources.
 
