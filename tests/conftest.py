@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from unittest.mock import MagicMock
 
 import pytest
-from lakefs_client.apis import BranchesApi, CommitsApi
+from lakefs_client.apis import BranchesApi, CommitsApi, ObjectsApi
 from prefect.testing.utilities import prefect_test_harness
 
 from prefect_lakefs import LakeFSCredentials
@@ -67,3 +67,19 @@ def _mock_commits_client(monkeypatch):
     )
 
     return commits_client
+
+
+@pytest.fixture
+def _mock_objects_client(monkeypatch):
+    objects_client = MagicMock(spec=ObjectsApi)
+
+    @contextmanager
+    def get_client(self, _):
+        yield objects_client
+
+    monkeypatch.setattr(
+        "prefect_lakefs.credentials.LakeFSCredentials.get_client",
+        get_client,
+    )
+
+    return objects_client

@@ -125,7 +125,7 @@ async def log_branch_commits(
         lakefs_credentials: `LakeFSCredentials` block for creating
             authenticated LakeFS API clients.
         repository: name of a lakefs repository.
-        branhc: branch to fetch the commit log for.
+        branch: branch to fetch the commit log for.
         **lakefs_kwargs: Optional extra keyword arguments to pass to the LakeFS API.
 
     Returns:
@@ -141,7 +141,7 @@ async def log_branch_commits(
 
         @flow
         def log_branch_commits_for_main_example_repo():
-            commit = get_commit(
+            commit = log_branch_commits(
                 lakefs_credentials=LakeFSCredentials.load("lakefs-creds"),
                 repository="example",
                 branch="main",
