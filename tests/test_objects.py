@@ -1,8 +1,3 @@
-import io
-from unittest import mock
-from unittest.mock import MagicMock
-
-import _io
 from lakefs_client.models import ObjectCopyCreation, ObjectStageCreation, PathList
 
 from prefect_lakefs.objects import (
