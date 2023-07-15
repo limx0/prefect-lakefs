@@ -4,4 +4,4 @@
 
 # Traceback / Example
 
-- [ ] I would like to [help contribute](https://arthur_dent.github.io/prefect-lakefs/#contributing) a pull request to resolve this!
+- [ ] I would like to [help contribute](https://limx0.github.io/prefect-lakefs/#contributing) a pull request to resolve this!
