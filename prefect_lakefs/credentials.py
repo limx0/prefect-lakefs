@@ -58,6 +58,10 @@ class LakeFSCredentials(Block):
         description="Default LakeFS branch to use.",
         title="Default LakeFS branch",
     )
+    commit_on_task: Optional[bool] = Field(
+        description="Commit on each task run.",
+        title="Commit on task",
+    )
     _block_type_name = "LakeFS Credentials"
     _block_type_slug = "lakefs-credentials"
     # TODO: add lakefs logo_url
