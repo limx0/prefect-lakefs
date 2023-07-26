@@ -30,7 +30,7 @@ def test_storage_init():
         mock_creds.return_value.__enter__.return_value = mock_client
         my_flow()
 
-    result = mock_client.method_calls[0].kwargs
+    result = mock_client.method_calls[1].kwargs
     assert result["repository"] == "data"
     assert result["branch"] == "dev"
     assert isinstance(result["path"], str)

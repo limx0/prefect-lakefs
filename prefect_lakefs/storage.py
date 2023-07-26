@@ -68,6 +68,9 @@ class LakeFS(S3Bucket):
 
         with self.credentials.get_client("commits") as client:
             run_context: FlowRunContext = FlowRunContext.get()
-            metadata = {"flow_run_id": run_context.flow_run.id.hex}
+            if run_context:
+                metadata = {"flow_run_id": run_context.flow_run.id.hex}
+            else:
+                metadata = {}
             commit = CommitCreation("prefect-lakefs commit", metadata=metadata)
             client.commit(repository=repository, branch=branch, commit_creation=commit)
