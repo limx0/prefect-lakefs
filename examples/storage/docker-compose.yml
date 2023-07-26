@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+  minio:
+    image: minio/minio
+    restart: always
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  lakefs:
+    image: treeverse/lakefs:latest
+    command: run
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      LAKEFS_DATABASE_TYPE: "postgres"
+      LAKEFS_DATABASE_POSTGRES_CONNECTION_STRING: "host=postgres dbname=postgres user=postgres password=example"
+      LAKEFS_AUTH_ENCRYPT_SECRET_KEY: "secret"
+      LAKEFS_BLOCKSTORE_TYPE: "s3"
+      LAKEFS_BLOCKSTORE_S3_FORCE_PATH_STYLE: "true"
+      LAKEFS_BLOCKSTORE_S3_ENDPOINT: "http://minio:9000"
+      LAKEFS_BLOCKSTORE_S3_DISCOVER_BUCKET_REGION: "false"
+      LAKEFS_BLOCKSTORE_S3_CREDENTIALS_ACCESS_KEY_ID: "minioadmin"
+      LAKEFS_BLOCKSTORE_S3_CREDENTIALS_SECRET_ACCESS_KEY: "minioadmin"
