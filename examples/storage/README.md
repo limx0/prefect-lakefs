@@ -18,10 +18,17 @@ Minio:
 - Create a bucket called `lakefs`
 
 LakeFS:
-- Go to the LakeFS UI at http://127.0.0.1:8000/setup and setup a user and email
-- Record the `Access Key ID` and secret key `Secret Access Key` somewhere.
-- Go to login and login with access key id and secret access key.
-- Create a sample repository using `s3://lakefs` as the Storage Namespace.
+- Go to the LakeFS UI at http://127.0.0.1:8000/setup and setup a user and email.
+- Download credentials and place in the current directory.
+- Go to login and login with access key id and secret access key from credential file.
+- Create a sample repository:
+  - `Repository ID`: lakefs
+  - `Storage Namespace`: `s3://lakefs`
+  - `Default Branch`: `main`
 
-Run:
-- Open the `storage_example.ipynb` notebook and run it.
+# Run:
+- Run the `example.py` file to push some data to lakefs.
+- `git checkout -b mynewbranch`
+- Make changes to `example.py`
+- Re-run the `example.py` file to push changes to a new branch in lakefs automatically.
+-

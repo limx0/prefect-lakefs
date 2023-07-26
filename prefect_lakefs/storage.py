@@ -1,5 +1,6 @@
 import io
 
+from lakefs_client.exceptions import NotFoundException
 from lakefs_client.model.commit_creation import CommitCreation
 from prefect.context import FlowRunContext
 from prefect_aws import S3Bucket
@@ -20,7 +21,25 @@ class LakeFS(S3Bucket):
             "Should be using LakeFS client via `self.credentials.get_client()`"
         )
 
+    def _check_branch(self):
+        with self.credentials.get_client("branches") as branches:
+            try:
+                branches.get_branch(
+                    repository=self.credentials.repository,
+                    branch=self.credentials.branch,
+                )
+                return
+            except NotFoundException:
+                branches.create_branch(
+                    repository=self.credentials.repository,
+                    branch_creation={
+                        "name": self.credentials.branch,
+                        "source": "main",
+                    },
+                )
+
     def _write_sync(self, key: str, data: bytes) -> None:
+        self._check_branch()
         with self.credentials.get_client("objects") as client:
             with io.BytesIO(data) as stream:
                 stream.name = key
@@ -49,6 +68,6 @@ class LakeFS(S3Bucket):
 
         with self.credentials.get_client("commits") as client:
             run_context: FlowRunContext = FlowRunContext.get()
-            metadata = {"flow_run_id": run_context.flow.id}
+            metadata = {"flow_run_id": run_context.flow_run.id.hex}
             commit = CommitCreation("prefect-lakefs commit", metadata=metadata)
             client.commit(repository=repository, branch=branch, commit_creation=commit)
