@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pandas as pd
 import yaml  # type: ignore
 from git import InvalidGitRepositoryError, NoSuchPathError, Repo
@@ -15,14 +17,14 @@ def read_creds():
     }
 
 
-def get_git_repo() -> Repo | None:
+def get_git_repo() -> Optional[Repo]:
     try:
         return Repo(".", search_parent_directories=True)
     except (InvalidGitRepositoryError, NoSuchPathError):
         return None
 
 
-def get_branch_name() -> str | None:
+def get_branch_name() -> Optional[str]:
     repo = get_git_repo()
     if repo is None:
         return None
