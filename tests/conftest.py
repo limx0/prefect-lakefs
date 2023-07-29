@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from unittest.mock import MagicMock
 
 import pytest
-from lakefs_client.apis import BranchesApi, CommitsApi, RefsApi
+from lakefs_client.apis import BranchesApi, CommitsApi, ObjectsApi, RefsApi
 from prefect.testing.utilities import prefect_test_harness
 
 from prefect_lakefs import LakeFSCredentials
