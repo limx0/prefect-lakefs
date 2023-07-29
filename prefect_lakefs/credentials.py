@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from typing import Generator, Optional, Union
 
 from lakefs_client import ApiClient
-from lakefs_client.apis import BranchesApi, CommitsApi, ObjectsApi
+from lakefs_client.apis import BranchesApi, CommitsApi, ObjectsApi, RefsApi
 from lakefs_client.client import LakeFSClient
 from lakefs_client.configuration import Configuration
 from prefect.blocks.core import Block
@@ -14,6 +14,7 @@ LAKEFS_CLIENT_TYPES = {
     "branches": BranchesApi,
     "commits": CommitsApi,
     "objects": ObjectsApi,
+    "refs": RefsApi,
 }
 
 
