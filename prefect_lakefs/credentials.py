@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from typing import Generator, Optional, Union
 
 from lakefs_client import ApiClient
-from lakefs_client.apis import BranchesApi, CommitsApi, ObjectsApi
+from lakefs_client.apis import BranchesApi, CommitsApi, ObjectsApi, RefsApi
 from lakefs_client.client import LakeFSClient
 from lakefs_client.configuration import Configuration
 from prefect.blocks.core import Block
@@ -14,6 +14,7 @@ LAKEFS_CLIENT_TYPES = {
     "branches": BranchesApi,
     "commits": CommitsApi,
     "objects": ObjectsApi,
+    "refs": RefsApi,
 }
 
 
@@ -73,7 +74,7 @@ class LakeFSCredentials(Block):
     @contextmanager
     def get_client(
         self,
-        client_type: Literal["branches", "commits", "objects", "repository"],
+        client_type: Literal["branches", "commits", "objects", "repository", "refs"],
     ) -> Generator[LakeFSClient, None, None]:
         """Convenience method for retrieving a LakeFS API client for deployment resources.
 
