@@ -58,7 +58,7 @@ import asyncio
 from prefect_lakefs.credentials import LakeFSCredentials
 from prefect_lakefs.tasks import list_branches
 
-# You can configure this while adding a block in the prefect-ui or 
+# You can configure this while adding a block in the prefect-ui or
 #   you can save the block using .save() utility method provided by the block.
 lakefs_creds = LakeFSCredentials(
         endpoint_url="http://localhost:8000/api/v1",
@@ -74,7 +74,7 @@ def list_branches_for_example_repo():
         repository="example",
     )
     print(branches)
- 
+
 
 
 if __name__ == "__main__":

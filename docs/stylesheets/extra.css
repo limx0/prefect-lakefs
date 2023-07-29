@@ -1,9 +1,9 @@
-/* theme */ 
+/* theme */
 :root > * {
-    /* theme */ 
+    /* theme */
     --md-primary-fg-color: #115AF4;
     --md-primary-fg-color--light: #115AF4;
-    --md-primary-fg-color--dark:  #115AF4;  
+    --md-primary-fg-color--dark:  #115AF4;
 }
 
 /* Table formatting */
