@@ -22,6 +22,14 @@ from prefect_lakefs.objects import (
     stat_object,
     upload_object,
 )
+from prefect_lakefs.refs import (
+    diff_refs,
+    dump_refs,
+    find_merge_base,
+    log_commits,
+    merge_into_branch,
+    restore_refs,
+)
 
 __all__ = [
     "cherry_pick",
@@ -45,4 +53,10 @@ __all__ = [
     "stage_object",
     "stat_object",
     "upload_object",
+    "diff_refs",
+    "dump_refs",
+    "find_merge_base",
+    "log_commits",
+    "merge_into_branch",
+    "restore_refs",
 ]
