@@ -2,7 +2,7 @@ from datetime import datetime
 
 from lakefs_client.models import CommitCreation
 
-from prefect_lakefs.commits import commit, get_commit, log_branch_commits
+from prefect_lakefs.commits import commit, get_commit
 
 
 async def test_commit(lakefs_credentials, _mock_commits_client):
@@ -33,15 +33,3 @@ async def test_get_commit(lakefs_credentials, _mock_commits_client):
     )
     assert _mock_commits_client.get_commit.call_args[1]["repository"] == "example"
     assert _mock_commits_client.get_commit.call_args[1]["commit_id"] == "commit_sha"
-
-
-async def test_log_branch_commits(lakefs_credentials, _mock_commits_client):
-    await log_branch_commits.fn(
-        repository="example",
-        branch="main",
-        lakefs_credentials=lakefs_credentials,
-    )
-    assert (
-        _mock_commits_client.log_branch_commits.call_args[1]["repository"] == "example"
-    )
-    assert _mock_commits_client.log_branch_commits.call_args[1]["branch"] == "main"

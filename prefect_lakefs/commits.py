@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import Any, Dict
 
-from lakefs_client.models import Commit, CommitCreation, CommitList
+from lakefs_client.models import Commit, CommitCreation
 from prefect import task
 from prefect.utilities.asyncutils import run_sync_in_worker_thread
 
@@ -108,51 +108,5 @@ async def get_commit(
             commits.get_commit,
             repository=repository,
             commit_id=commit_id,
-            **lakefs_kwargs,
-        )
-
-
-@task
-async def log_branch_commits(
-    repository: str,
-    branch: str,
-    lakefs_credentials: LakeFSCredentials,
-    **lakefs_kwargs: Dict[str, Any],
-) -> CommitList:
-    """get commit log for a lakefs branch provided.
-
-    Args:
-        lakefs_credentials: `LakeFSCredentials` block for creating
-            authenticated LakeFS API clients.
-        repository: name of a lakefs repository.
-        branch: branch to fetch the commit log for.
-        **lakefs_kwargs: Optional extra keyword arguments to pass to the LakeFS API.
-
-    Returns:
-        A LakeFS `CommitList` object.
-
-    Example:
-        get commit log from repository named `example` given branch `main`:
-
-        ```python
-        from prefect import flow
-        from prefect_lakefs import LakeFSCredentials
-        from prefect_lakefs.tasks import log_branch_commits
-
-        @flow
-        def log_branch_commits_for_main_example_repo():
-            commit = log_branch_commits(
-                lakefs_credentials=LakeFSCredentials.load("lakefs-creds"),
-                repository="example",
-                branch="main",
-            )
-        ```
-    """
-
-    with lakefs_credentials.get_client("commits") as commits:
-        return await run_sync_in_worker_thread(
-            commits.log_branch_commits,
-            repository=repository,
-            branch=branch,
             **lakefs_kwargs,
         )

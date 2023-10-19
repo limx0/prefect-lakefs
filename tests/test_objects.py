@@ -1,4 +1,4 @@
-from lakefs_client.models import ObjectCopyCreation, ObjectStageCreation, PathList
+from lakefs_client.models import ObjectCopyCreation, PathList
 
 from prefect_lakefs.objects import (
     copy_object,
@@ -8,7 +8,6 @@ from prefect_lakefs.objects import (
     get_underlying_properties,
     head_object,
     list_objects,
-    stage_object,
     stat_object,
     upload_object,
 )
@@ -112,28 +111,6 @@ async def test_list_objects(lakefs_credentials, _mock_objects_client):
     )
     assert _mock_objects_client.list_objects.call_args[1]["repository"] == "example"
     assert _mock_objects_client.list_objects.call_args[1]["ref"] == "main"
-
-
-async def test_stage_object(lakefs_credentials, _mock_objects_client):
-    await stage_object.fn(
-        repository="example",
-        ref="main",
-        path="obj/path",
-        physical_address="node_addr",
-        checksum="checksum_hash",
-        size_bytes=11,
-        lakefs_credentials=lakefs_credentials,
-    )
-    assert _mock_objects_client.stage_object.call_args[1]["repository"] == "example"
-    assert _mock_objects_client.stage_object.call_args[1]["ref"] == "main"
-    assert _mock_objects_client.stage_object.call_args[1]["path"] == "obj/path"
-    assert _mock_objects_client.stage_object.call_args[1][
-        "object_stage_creation"
-    ] == ObjectStageCreation(
-        physical_address="node_addr",
-        checksum="checksum_hash",
-        size_bytes=11,
-    )
 
 
 async def test_stat_object(lakefs_credentials, _mock_objects_client):
