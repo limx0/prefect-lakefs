@@ -74,7 +74,9 @@ class LakeFSCredentials(Block):
     @contextmanager
     def get_client(
         self,
-        client_type: Literal["branches", "commits", "objects", "repository", "refs"],
+        client_type: Literal[
+            "branches", "commits", "objects", "repository", "refs", "internal"
+        ],
     ) -> Generator[LakeFSClient, None, None]:
         """Convenience method for retrieving a LakeFS API client for deployment resources.
 

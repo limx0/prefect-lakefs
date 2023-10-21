@@ -9,7 +9,8 @@ from prefect_lakefs.branches import (
     reset_branch,
     revert_branch,
 )
-from prefect_lakefs.commits import commit, get_commit, log_branch_commits
+from prefect_lakefs.commits import commit, get_commit
+from prefect_lakefs.internal import dump_refs, restore_refs, stage_object
 from prefect_lakefs.objects import (
     copy_object,
     delete_object,
@@ -18,17 +19,14 @@ from prefect_lakefs.objects import (
     get_underlying_properties,
     head_object,
     list_objects,
-    stage_object,
     stat_object,
     upload_object,
 )
 from prefect_lakefs.refs import (
     diff_refs,
-    dump_refs,
     find_merge_base,
     log_commits,
     merge_into_branch,
-    restore_refs,
 )
 
 __all__ = [
@@ -42,7 +40,6 @@ __all__ = [
     "revert_branch",
     "commit",
     "get_commit",
-    "log_branch_commits",
     "copy_object",
     "delete_object",
     "delete_objects",

@@ -4,7 +4,6 @@ from typing import Any, Dict, List
 from lakefs_client.models import (
     ObjectCopyCreation,
     ObjectErrorList,
-    ObjectStageCreation,
     ObjectStats,
     ObjectStatsList,
     PathList,
@@ -373,67 +372,6 @@ async def list_objects(
             objects.list_objects,
             repository=repository,
             ref=ref,
-            **lakefs_kwargs,
-        )
-
-
-@task
-async def stage_object(
-    repository: str,
-    ref: str,
-    path: str,
-    physical_address: str,
-    checksum: str,
-    size_bytes: int,
-    lakefs_credentials: LakeFSCredentials,
-    **lakefs_kwargs: Dict[str, Any],
-) -> ObjectStats:
-    """stage object's metadata at given ref prefix.
-
-    Args:
-        lakefs_credentials: `LakeFSCredentials` block for creating
-            authenticated LakeFS API clients.
-        repository: name of a lakefs repository.
-        ref: branch/ref name for which the objects to be staged for.
-        **lakefs_kwargs: Optional extra keyword arguments to pass to the LakeFS API.
-
-    Returns:
-        ObjectStats
-
-    Example:
-        get object's existence at given path in branch `main`:
-
-        ```python
-        from prefect import flow
-        from prefect_lakefs import LakeFSCredentials
-        from prefect_lakefs.tasks import stage_object
-
-        @flow
-        def stage_object_for_main_example_repo():
-            object_stat = await stage_object(
-                lakefs_credentials=LakeFSCredentials.load("lakefs-creds"),
-                repository="example",
-                ref="main",
-                path="obj/path",
-                physical_address="node_addr",
-                checksum="checksum_hash",
-                size_bytes=11,
-            )
-        ```
-    """
-
-    # TODO: should this be the expected behaviour? or fetch ObjectStats from elsewhere?
-    with lakefs_credentials.get_client("objects") as objects:
-        return await run_sync_in_worker_thread(
-            objects.stage_object,
-            repository=repository,
-            ref=ref,
-            path=path,
-            object_stage_creation=ObjectStageCreation(
-                physical_address=physical_address,
-                checksum=checksum,
-                size_bytes=size_bytes,
-            ),
             **lakefs_kwargs,
         )
 
