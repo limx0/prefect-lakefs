@@ -1,5 +1,5 @@
 prefect>=2.0.0
 prefect-aws>=0.2.4
-lakefs-client>=0.113.0
+lakefs-client>=1.0.0
 gitpython>=3.1.31
 pydantic<2
